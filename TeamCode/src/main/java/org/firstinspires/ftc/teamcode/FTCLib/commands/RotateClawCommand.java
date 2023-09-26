@@ -8,8 +8,8 @@ public class RotateClawCommand extends CommandBase {
 
     private ClawSubsystem clawSubsystem;
 
-    public void RotateClawCommand(ClawSubsystem clawSubsystem)  {
-        this.clawSubsystem = clawSubsystem
+    public RotateClawCommand(ClawSubsystem clawSubsystem)  {
+        this.clawSubsystem = clawSubsystem;
 
     }
     @Override
