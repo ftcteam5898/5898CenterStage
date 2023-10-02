@@ -17,6 +17,8 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
  */
 public class MecanumDrive extends RobotDrive {
     private double rightSideMultiplier;
+    private double lfMultiplier;
+    private double rbMultiplier;
 
     Motor[] motors;
 
@@ -63,6 +65,10 @@ public class MecanumDrive extends RobotDrive {
      */
     public void setRightSideInverted(boolean isInverted) {
         rightSideMultiplier = isInverted ? -1.0 : 1.0;
+    }
+    public void setWheelXInverted(boolean invert) {
+        lfMultiplier = invert ? -1.0 : 1.0;
+        rbMultiplier = invert ? -1.0 : 1.0;
     }
 
     /**

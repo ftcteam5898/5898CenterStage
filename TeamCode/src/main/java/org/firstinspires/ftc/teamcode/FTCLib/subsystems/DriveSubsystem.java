@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.FTCLib.drive.MecanumDrive;
+import org.firstinspires.ftc.teamcode.RoadRunner.util.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
 
@@ -14,6 +15,10 @@ public class DriveSubsystem extends SubsystemBase {
     private RevIMU imu;
     private Telemetry telemetry;
     private boolean isFieldCentric = false;
+    private Encoder lbe, lfe, rbe, rfe;
+
+    private double wheelDiameter  = 3.6;
+    private int pulses;
 
     public DriveSubsystem(Motor frontLeft, Motor frontRight, Motor backLeft, Motor backRight) {
         rf = frontRight;
@@ -32,7 +37,39 @@ public class DriveSubsystem extends SubsystemBase {
         drive = new MecanumDrive(lf, rf, lb, rb);
         imu = rev;
     }
-    public void drive(double strafeSpeed, double forwardSpeed, double turnSpeed) {
+
+    public void resetEncoders() {
+        lb.resetEncoder();
+        lf.resetEncoder();
+        rb.resetEncoder();
+        rf.resetEncoder();
+    }
+
+    public void strafe(int amt, double power) {
+
+        rf.setTargetPosition(rf.getCurrentPosition() - amt);
+        rb.setTargetPosition(rb.getCurrentPosition() + amt);
+        lf.setTargetPosition(lf.getCurrentPosition() + amt);
+        lb.setTargetPosition(lb.getCurrentPosition() - amt);
+    }
+    public void leftAmt(int amt, double power) {
+        rf.setTargetPosition(rf.getCurrentPosition() + amt);
+        rb.setTargetPosition(rb.getCurrentPosition() + amt);
+        lf.setTargetPosition(lf.getCurrentPosition() - amt);
+        lb.setTargetPosition(lb.getCurrentPosition() - amt);
+
+        runToPosition();
+    }
+    public void runToPosition() {
+
+        rf.setRunMode(Motor.RunMode.VelocityControl);
+        rb.setRunMode(Motor.RunMode.VelocityControl);
+        lf.setRunMode(Motor.RunMode.VelocityControl);
+        lb.setRunMode(Motor.RunMode.VelocityControl);
+    }
+
+
+        public void drive(double strafeSpeed, double forwardSpeed, double turnSpeed) {
         if (isFieldCentric) {
             drive.driveFieldCentric(-strafeSpeed, -forwardSpeed, -turnSpeed, imu.getHeading(), true);
         }
