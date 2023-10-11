@@ -7,9 +7,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class IntakeSubsystem extends SubsystemBase {
 
     private Motor intake;
+    private Motor rotate;
 
-    public IntakeSubsystem(Motor intake) {
+    public IntakeSubsystem(Motor intake, Motor rotate) {
         this.intake = intake;
+        this.rotate = rotate;
+        intake.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        rotate.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
     }
 
     public void rotateIn() {
@@ -21,6 +25,16 @@ public class IntakeSubsystem extends SubsystemBase {
     public void stopIntake() {
         intake.set(0.0);
     }
+    public void turnUp() {
+        rotate.set(10.0);
+    }
+    public void turnDown() {
+        rotate.set(-10.0);
+    }
+    public void stopTurn() {
+        rotate.set(0.0);
+    }
+
     }
 
 

@@ -1,33 +1,19 @@
 package org.firstinspires.ftc.teamcode.FTCLib;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.StartEndCommand;
-import com.arcrobotics.ftclib.command.Subsystem;
-import com.arcrobotics.ftclib.command.button.GamepadButton;
-import com.arcrobotics.ftclib.command.button.Trigger;
 import com.arcrobotics.ftclib.gamepad.ButtonReader;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.arcrobotics.ftclib.gamepad.TriggerReader;
 import com.arcrobotics.ftclib.hardware.RevIMU;
-import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.FTCLib.commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.commands.IntakeCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.commands.OpenC1Command;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands.DriveCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.ClawSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.IntakeSubsystem;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 @TeleOp (name = "Meet1TeleNONO", group = "tele")
@@ -44,7 +30,7 @@ public class Meet1Tele extends CommandOpMode {
     private DriveCommand driveCommand;
 
     private Motor lb, lf, rb, rf;
-    private Motor intake;
+    private Motor intake, rotate;
 
     @Override
     public void initialize() {
@@ -61,7 +47,7 @@ public class Meet1Tele extends CommandOpMode {
         lf.motor.setDirection(DcMotor.Direction.FORWARD);
 
         driveSubsystem = new DriveSubsystem(lf, rf, lb, rb, revIMU);
-        intakeSubsystem = new IntakeSubsystem(intake);
+        intakeSubsystem = new IntakeSubsystem(intake, rotate);
 
         Adam = new GamepadEx(gamepad1);
         Scott = new GamepadEx(gamepad2);

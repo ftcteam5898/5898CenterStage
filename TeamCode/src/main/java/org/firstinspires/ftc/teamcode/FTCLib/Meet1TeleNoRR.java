@@ -27,7 +27,7 @@ public class Meet1TeleNoRR extends LinearOpMode {
     private GamepadKeys.Trigger left, right;
     private RevIMU revIMU;
     private Motor lb, lf, rb, rf;
-    private Motor intake;
+    private Motor intake, rotate;
     private IntakeSubsystem intakeSubsystem;
     private MecanumDrive drive;
 
@@ -40,7 +40,7 @@ public class Meet1TeleNoRR extends LinearOpMode {
         rf = new Motor(hardwareMap, "rf", Motor.GoBILDA.RPM_435);
 
         MecanumDrive drive = new MecanumDrive(lf, rf, lb, rb);
-        intakeSubsystem = new IntakeSubsystem(intake);
+        intakeSubsystem = new IntakeSubsystem(intake, rotate);
 
         rf.setInverted(true);
         lf.setInverted(true);

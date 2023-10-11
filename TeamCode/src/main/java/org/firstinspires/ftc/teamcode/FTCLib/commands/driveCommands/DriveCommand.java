@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.FTCLib.commands;
+package org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands;
 
 import com.acmerobotics.roadrunner.drive.Drive;
 import com.arcrobotics.ftclib.command.CommandBase;

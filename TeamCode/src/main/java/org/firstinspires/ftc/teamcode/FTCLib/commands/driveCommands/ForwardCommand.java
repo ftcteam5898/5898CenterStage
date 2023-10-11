@@ -1,16 +1,16 @@
-package org.firstinspires.ftc.teamcode.FTCLib.commands;
+package org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
 
-public class AutoDriveCommand extends CommandBase {
+public class ForwardCommand extends CommandBase {
 
     private DriveSubsystem drive;
-    private double distance;
+    private int distance;
     private double speed;
 
-    public AutoDriveCommand(double inches, double speed, DriveSubsystem drive) {
+    public ForwardCommand(int inches, double speed, DriveSubsystem drive) {
         distance = inches;
         this.speed = speed;
         this.drive = drive;
@@ -19,5 +19,7 @@ public class AutoDriveCommand extends CommandBase {
     @Override
     public void initialize() {
         drive.resetEncoders();
+        drive.forwardAmt(distance, speed);
+
     }
 }

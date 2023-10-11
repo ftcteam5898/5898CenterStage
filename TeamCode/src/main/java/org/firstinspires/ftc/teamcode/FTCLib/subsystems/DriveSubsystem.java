@@ -37,6 +37,12 @@ public class DriveSubsystem extends SubsystemBase {
         drive = new MecanumDrive(lf, rf, lb, rb);
         imu = rev;
     }
+    public DriveSubsystem(Motor frontLeft, Motor frontRight, Motor backLeft, Motor backRight, boolean auto) {
+        rf = frontRight;
+        lf = frontLeft;
+        lb = backLeft;
+        rb = backRight;
+    }
 
     public void resetEncoders() {
         lb.resetEncoder();
@@ -57,17 +63,41 @@ public class DriveSubsystem extends SubsystemBase {
         rb.setTargetPosition(rb.getCurrentPosition() + amt);
         lf.setTargetPosition(lf.getCurrentPosition() - amt);
         lb.setTargetPosition(lb.getCurrentPosition() - amt);
-
-        runToPosition();
     }
-    public void runToPosition() {
+    public void rightAmt(int amt, double power) {
+        rf.setTargetPosition(rf.getCurrentPosition() - amt);
+        rb.setTargetPosition(rb.getCurrentPosition() - amt);
+        lf.setTargetPosition(lf.getCurrentPosition() + amt);
+        lb.setTargetPosition(lb.getCurrentPosition() + amt);
+    }
+    public void backAmt(int amt, double power) {
+
+        rf.setTargetPosition(rf.getCurrentPosition() - amt);
+        rb.setTargetPosition(rb.getCurrentPosition() - amt);
+        lf.setTargetPosition(lf.getCurrentPosition() - amt);
+        lb.setTargetPosition(lb.getCurrentPosition() - amt);
+
+    }
+    public void forwardAmt(int amt, double power) {
+
+        rf.setTargetPosition(rf.getCurrentPosition() + amt);
+        rb.setTargetPosition(rb.getCurrentPosition() + amt);
+        lf.setTargetPosition(lf.getCurrentPosition() + amt);
+        lb.setTargetPosition(lb.getCurrentPosition() + amt);
+    }
+    public void stopRobot() {
+        rf.set(0);
+        lf.set(0);
+        rb.set(0);
+        lb.set(0);
+    }
+        public void runToPosition() {
 
         rf.setRunMode(Motor.RunMode.VelocityControl);
         rb.setRunMode(Motor.RunMode.VelocityControl);
         lf.setRunMode(Motor.RunMode.VelocityControl);
         lb.setRunMode(Motor.RunMode.VelocityControl);
     }
-
 
         public void drive(double strafeSpeed, double forwardSpeed, double turnSpeed) {
         if (isFieldCentric) {
