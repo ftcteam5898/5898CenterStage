@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.FTCLib.commands;
 
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands.BackCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands.ForwardCommand;
@@ -11,17 +12,21 @@ import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.LiftSubsystem;
 
-public class AutoTestCommandGroup extends SequentialCommandGroup {
+public class AutoLongCommandGroup extends SequentialCommandGroup {
+
+    private ElapsedTime time;
+    DriveSubsystem driveSubsystem;
+    private boolean hell;
 
 
-public AutoTestCommandGroup(DriveSubsystem driveSubsystem) {
+public AutoLongCommandGroup(DriveSubsystem driveSubsystem, ElapsedTime time) {
+    this.driveSubsystem = driveSubsystem;
+    this.time = time;
 
     addCommands(
-            new ForwardCommand(10, 0.5, driveSubsystem),
-            new TurnCommand(10, 0.5, driveSubsystem, 1),
-            new TurnCommand(10, 0.5, driveSubsystem, 2),
-            new StrafeCommand(10, 0.5, driveSubsystem),
-            new BackCommand(5, 0.5, driveSubsystem)
+            new ForwardCommand(10, 0.2, driveSubsystem, time, 0.5),
+            new StrafeCommand(10, 0.5, driveSubsystem, time,3.5)
+
     );
 
 }

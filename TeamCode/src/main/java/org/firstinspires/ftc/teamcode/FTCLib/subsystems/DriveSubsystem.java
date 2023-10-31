@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.FTCLib.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 
@@ -16,6 +17,7 @@ public class DriveSubsystem extends SubsystemBase {
     private Telemetry telemetry;
     private boolean isFieldCentric = false;
     private Encoder lbe, lfe, rbe, rfe;
+    private GamepadEx Adam;
 
     private double wheelDiameter  = 3.6;
     private int pulses;
@@ -43,47 +45,48 @@ public class DriveSubsystem extends SubsystemBase {
         lb = backLeft;
         rb = backRight;
     }
-
     public void resetEncoders() {
         lb.resetEncoder();
         lf.resetEncoder();
         rb.resetEncoder();
         rf.resetEncoder();
     }
-
     public void strafe(int amt, double power) {
-
         rf.setTargetPosition(rf.getCurrentPosition() - amt);
         rb.setTargetPosition(rb.getCurrentPosition() + amt);
         lf.setTargetPosition(lf.getCurrentPosition() + amt);
         lb.setTargetPosition(lb.getCurrentPosition() - amt);
+        allPower(power);
     }
     public void leftAmt(int amt, double power) {
         rf.setTargetPosition(rf.getCurrentPosition() + amt);
         rb.setTargetPosition(rb.getCurrentPosition() + amt);
         lf.setTargetPosition(lf.getCurrentPosition() - amt);
         lb.setTargetPosition(lb.getCurrentPosition() - amt);
+        allPower(power);
     }
     public void rightAmt(int amt, double power) {
         rf.setTargetPosition(rf.getCurrentPosition() - amt);
         rb.setTargetPosition(rb.getCurrentPosition() - amt);
         lf.setTargetPosition(lf.getCurrentPosition() + amt);
         lb.setTargetPosition(lb.getCurrentPosition() + amt);
+        allPower(power);
     }
     public void backAmt(int amt, double power) {
-
         rf.setTargetPosition(rf.getCurrentPosition() - amt);
         rb.setTargetPosition(rb.getCurrentPosition() - amt);
         lf.setTargetPosition(lf.getCurrentPosition() - amt);
         lb.setTargetPosition(lb.getCurrentPosition() - amt);
 
+        allPower(power);
     }
     public void forwardAmt(int amt, double power) {
-
         rf.setTargetPosition(rf.getCurrentPosition() + amt);
         rb.setTargetPosition(rb.getCurrentPosition() + amt);
         lf.setTargetPosition(lf.getCurrentPosition() + amt);
         lb.setTargetPosition(lb.getCurrentPosition() + amt);
+
+        allPower(power);
     }
     public void stopRobot() {
         rf.set(0);
@@ -91,14 +94,13 @@ public class DriveSubsystem extends SubsystemBase {
         rb.set(0);
         lb.set(0);
     }
-        public void runToPosition() {
+     public void allPower(double power) {
+         rf.set(power);
+         rb.set(power);
+         lf.set(power);
+         lb.set(power);
 
-        rf.setRunMode(Motor.RunMode.VelocityControl);
-        rb.setRunMode(Motor.RunMode.VelocityControl);
-        lf.setRunMode(Motor.RunMode.VelocityControl);
-        lb.setRunMode(Motor.RunMode.VelocityControl);
     }
-
         public void drive(double strafeSpeed, double forwardSpeed, double turnSpeed) {
         if (isFieldCentric) {
             drive.driveFieldCentric(-strafeSpeed, -forwardSpeed, -turnSpeed, imu.getHeading(), true);

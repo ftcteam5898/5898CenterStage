@@ -19,10 +19,16 @@ public class ClawSubsystem extends SubsystemBase {
     }
 
     public void openClaw() {
-        claw.setPosition(10.0); // placeholder number
+        claw.setPosition(1.0);
+    }
+    public void bumpUp() {
+        claw.setPosition(0.7);
+    }
+    public void bumpDown() {
+        claw.setPosition(0.5);
     }
 
     public void closeClaw() {
-        claw.setPosition(10.0); // placeholder number
+        claw.setPosition(0.5); // placeholder number
     }
 }

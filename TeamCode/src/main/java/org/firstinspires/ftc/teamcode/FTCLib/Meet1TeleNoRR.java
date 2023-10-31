@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.FTCLib.subsystems.IntakeSubsystem;
 @TeleOp(name = "Meet1Tele", group = "tele")
 public class Meet1TeleNoRR extends LinearOpMode {
 
-    static final boolean fieldCentric = true;
+    static final boolean fieldCentric = false;
 
     private GamepadEx Adam, Scott;
     private GamepadKeys.Trigger left, right;

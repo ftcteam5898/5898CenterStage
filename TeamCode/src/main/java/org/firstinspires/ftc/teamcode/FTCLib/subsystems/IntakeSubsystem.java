@@ -17,22 +17,25 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void rotateIn() {
-        intake.set(10.0);
+        intake.set(0.5);
         }
     public void rotateOut() {
-        intake.set(-10.0);
+        intake.set(-0.45);
     }
     public void stopIntake() {
         intake.set(0.0);
     }
     public void turnUp() {
-        rotate.set(10.0);
+        rotate.set(0.2);
     }
     public void turnDown() {
-        rotate.set(-10.0);
+        rotate.set(-0.2);
     }
     public void stopTurn() {
         rotate.set(0.0);
+    }
+    public void brakeRotate() {
+        rotate.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
     }
 
     }

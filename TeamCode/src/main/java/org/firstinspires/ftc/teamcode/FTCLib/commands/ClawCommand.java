@@ -13,6 +13,7 @@ public class ClawCommand extends CommandBase {
     boolean hell;
 
     public ClawCommand(ClawSubsystem clawSubsystem, boolean hell) {
+        addRequirements(this.clawSubsystem);
         this.clawSubsystem = clawSubsystem;
         this.hell = hell;
 

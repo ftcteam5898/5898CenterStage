@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands;
 
 import com.acmerobotics.roadrunner.drive.Drive;
 import com.arcrobotics.ftclib.command.CommandBase;
+import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
 import java.util.function.DoubleSupplier;
@@ -11,6 +12,7 @@ public class DriveCommand extends CommandBase {
     private final DriveSubsystem driveSubsystem;
     private final DoubleSupplier strafe, forward, turn;
     private final double mult;
+    private GamepadEx Adam;
 
     public DriveCommand(DriveSubsystem subsystem, DoubleSupplier Dstrafe, DoubleSupplier Dforward,
                         DoubleSupplier Dturn, double multiplier) {
