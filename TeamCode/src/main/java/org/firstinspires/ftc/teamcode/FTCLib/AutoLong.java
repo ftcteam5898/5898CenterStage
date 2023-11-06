@@ -29,7 +29,6 @@ public class AutoLong extends CommandOpMode {
     private SimpleServo claw, rotateClaw, drone;
     private ElapsedTime time;
 
-
     @Override
     public void initialize() {
 
@@ -68,12 +67,5 @@ public class AutoLong extends CommandOpMode {
                 .andThen(new AutoLongCommandGroup(driveSubsystem, time)));
 
     }
-
-
-
-
-
-
-
     }
 

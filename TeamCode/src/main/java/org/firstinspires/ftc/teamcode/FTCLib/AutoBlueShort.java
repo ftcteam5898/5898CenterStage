@@ -70,10 +70,12 @@ public void initialize() {
 
         //schedule(new InstantCommand(() -> intakeSubsystem.turnDown()));
 
-
+/*
     schedule(new WaitUntilCommand(this :: isStarted)
             .andThen(new InstantCommand(() -> driveSubsystem.forwardAmt(10, 0.2)))
             .andThen(new AutoShortBLueCommandGroup(driveSubsystem, time, mecanumDrive)));
+
+ */
 }
 }
 
