@@ -19,6 +19,7 @@ public class MecanumDrive extends RobotDrive {
     private double rightSideMultiplier;
     private double lfMultiplier;
     private double rbMultiplier;
+    private double rfMultiplier;
 
     Motor[] motors;
 
@@ -46,7 +47,8 @@ public class MecanumDrive extends RobotDrive {
      */
     public MecanumDrive(boolean autoInvert, Motor frontLeft, Motor frontRight, Motor backLeft, Motor backRight) {
         motors = new Motor[]{frontLeft, frontRight, backLeft, backRight};
-        setRightSideInverted(autoInvert);
+        //setRightSideInverted(autoInvert);
+        setFrontWheelInverted(autoInvert);
     }
 
     /**
@@ -69,6 +71,10 @@ public class MecanumDrive extends RobotDrive {
     public void setWheelXInverted(boolean invert) {
         lfMultiplier = invert ? -1.0 : 1.0;
         rbMultiplier = invert ? -1.0 : 1.0;
+    }
+    public void setFrontWheelInverted(boolean invert) {
+        lfMultiplier = invert ? -1.0 : 1.0;
+        rfMultiplier = invert ? -1.0 : 1.0;
     }
 
     /**
