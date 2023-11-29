@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.FTCLib.commands;
+package org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.Servo;

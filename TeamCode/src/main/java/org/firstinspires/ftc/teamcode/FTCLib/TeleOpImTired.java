@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.FTCLib;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.gamepad.ButtonReader;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
@@ -11,12 +10,12 @@ import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.FTCLib.commands.BumpCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.commands.DroneCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.commands.IntakeCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.commands.ClawCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.commands.LiftCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.commands.RotateIntakeCommand;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.BumpCommand;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.DroneCommand;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.IntakeCommand;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.ClawCommand;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.LiftCommand;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.RotateIntakeCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands.DriveCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.ClawSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
@@ -51,14 +50,10 @@ public class TeleOpImTired extends CommandOpMode {
         revIMU.init();
 
         //schedule(new InstantCommand(() -> droneSubsystem.initDrone()));
-
         lb = new Motor(hardwareMap, "lb", Motor.GoBILDA.RPM_435);
         lf = new Motor(hardwareMap, "lf", Motor.GoBILDA.RPM_435);
         rb = new Motor(hardwareMap, "rb", Motor.GoBILDA.RPM_435);
         rf = new Motor(hardwareMap, "rf", Motor.GoBILDA.RPM_435);
-
-        //rf.setInverted(true);
-        //lf.setInverted(true);
 
         leftLift = new Motor(hardwareMap, "left");
         rightLift = new Motor(hardwareMap, "right");

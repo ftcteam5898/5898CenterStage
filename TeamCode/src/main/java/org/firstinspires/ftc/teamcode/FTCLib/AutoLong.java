@@ -9,11 +9,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.FTCLib.commands.AutoLongCommandGroup;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.MonkeCommandGroup;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.ClawSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DroneSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.LiftSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.MecanumDriveSubsystem;
+import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
 
 @Autonomous(name = "AutoLong")
 public class AutoLong extends CommandOpMode {
@@ -23,6 +26,7 @@ public class AutoLong extends CommandOpMode {
     private IntakeSubsystem intakeSubsystem;
     private ClawSubsystem clawSubsystem;
     private DroneSubsystem droneSubsystem;
+    private MecanumDriveSubsystem mecanumDriveSubsystem;
     private Motor rightLift, leftLift;
     private Motor lb, rb, rf, lf;
     private Motor intake, rotate;
@@ -55,6 +59,7 @@ public class AutoLong extends CommandOpMode {
         clawSubsystem = new ClawSubsystem(claw, rotateClaw);
         intakeSubsystem = new IntakeSubsystem(intake, rotate);
         droneSubsystem = new DroneSubsystem(drone);
+        mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
 
 
         //schedule(new InstantCommand(() -> intakeSubsystem.turnDown()));
@@ -64,7 +69,7 @@ public class AutoLong extends CommandOpMode {
 
         schedule(new WaitUntilCommand(this :: isStarted)
                 .andThen(new InstantCommand(() -> driveSubsystem.forwardAmt(10, 0.2)))
-                .andThen(new AutoLongCommandGroup(driveSubsystem, time)));
+                .andThen(new MonkeCommandGroup(mecanumDriveSubsystem)));
 
     }
     }

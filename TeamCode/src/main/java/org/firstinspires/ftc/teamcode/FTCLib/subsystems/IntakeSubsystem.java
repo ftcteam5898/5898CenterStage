@@ -17,7 +17,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void rotateIn() {
-        intake.set(0.5);
+        intake.set(0.45);
         }
     public void rotateOut() {
         intake.set(-0.45);

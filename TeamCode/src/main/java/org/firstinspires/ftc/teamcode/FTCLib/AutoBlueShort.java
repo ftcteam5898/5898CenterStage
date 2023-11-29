@@ -33,7 +33,6 @@ private Motor intake, rotate;
 private SimpleServo claw, rotateClaw, drone;
 private ElapsedTime time;
 
-
 @Override
 public void initialize() {
 
@@ -70,12 +69,11 @@ public void initialize() {
 
         //schedule(new InstantCommand(() -> intakeSubsystem.turnDown()));
 
-/*
+
     schedule(new WaitUntilCommand(this :: isStarted)
             .andThen(new InstantCommand(() -> driveSubsystem.forwardAmt(10, 0.2)))
-            .andThen(new AutoShortBLueCommandGroup(driveSubsystem, time, mecanumDrive)));
+            .andThen(new AutoShortBLueCommandGroup(mecanumDrive, time)));
 
- */
 }
 }
 

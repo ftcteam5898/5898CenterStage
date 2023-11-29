@@ -47,8 +47,8 @@ public class MecanumDrive extends RobotDrive {
      */
     public MecanumDrive(boolean autoInvert, Motor frontLeft, Motor frontRight, Motor backLeft, Motor backRight) {
         motors = new Motor[]{frontLeft, frontRight, backLeft, backRight};
-        //setRightSideInverted(autoInvert);
-        setFrontWheelInverted(autoInvert);
+        setRightSideInverted(autoInvert);
+        //setFrontWheelInverted(autoInvert);
     }
 
     /**
