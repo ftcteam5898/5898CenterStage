@@ -23,7 +23,7 @@ public class Auto_BlueFront extends LinearOpMode{
     double cpr = 537.7;
 
     // adjust gearRatio if you have geared up or down your motors
-    double gearRatio = 1;
+    double gearRatio = 24/16;
 
     // wheel diameter in inches
     // 3.779 is for the GoBilda mecanum wheels
@@ -312,8 +312,8 @@ public class Auto_BlueFront extends LinearOpMode{
         // more info on ftc-docs.firstinspires.org
         IMU.Parameters parameters = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
-                        RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
-                        RevHubOrientationOnRobot.UsbFacingDirection.UP
+                        RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                        RevHubOrientationOnRobot.UsbFacingDirection.LEFT
                 )
         );
 
