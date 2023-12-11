@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff;
 
 import com.arcrobotics.ftclib.command.CommandBase;
-import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DroneSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.DroneSubsystem;
 
 public class DroneCommand extends CommandBase {
 

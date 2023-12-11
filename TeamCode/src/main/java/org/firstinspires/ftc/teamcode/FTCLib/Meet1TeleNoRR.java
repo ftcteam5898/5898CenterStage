@@ -8,7 +8,7 @@ import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.IntakeSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.IntakeSubsystem;
 
 @TeleOp(name = "Meet1Tele", group = "tele")
 public class Meet1TeleNoRR extends LinearOpMode {

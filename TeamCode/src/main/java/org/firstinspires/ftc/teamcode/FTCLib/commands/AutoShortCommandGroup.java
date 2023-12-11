@@ -18,7 +18,7 @@ public class AutoShortCommandGroup extends SequentialCommandGroup {
         this.time = time;
 
         addCommands(
-                new StrafeCommand(10, 0.5, driveSubsystem, time, 2.0)
+                new StrafeCommand(10, 0.5, driveSubsystem, time, 2.0, true)
 
         );
     }

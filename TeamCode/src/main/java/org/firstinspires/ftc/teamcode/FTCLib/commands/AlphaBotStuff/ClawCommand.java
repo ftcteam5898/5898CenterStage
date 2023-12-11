@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.ClawSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.ClawSubsystem;
 
 public class ClawCommand extends CommandBase {
 

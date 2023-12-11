@@ -8,12 +8,11 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.FTCLib.commands.AutoLongCommandGroup;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.MonkeCommandGroup;
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.ClawSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.ClawSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DroneSubsystem;
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.IntakeSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.DroneSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.LiftSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.MecanumDriveSubsystem;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;

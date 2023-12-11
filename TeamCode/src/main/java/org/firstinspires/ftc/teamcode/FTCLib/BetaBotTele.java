@@ -7,8 +7,10 @@ import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.FTCLib.commands.LiftCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands.DriveCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.LiftSubsystem;
 
 @TeleOp(name = "MikhailLovell", group = "tele")
 public class BetaBotTele extends CommandOpMode {
@@ -17,7 +19,9 @@ public class BetaBotTele extends CommandOpMode {
     private GamepadKeys.Trigger left, right;
     private RevIMU revIMU;
     private Motor lb, lf, rb, rf;
+    private Motor leftLift, rightLift;
     private DriveSubsystem driveSubsystem;
+    private LiftSubsystem liftSubsystem;
     private DriveCommand driveCommand;
 
     @Override
@@ -36,7 +40,11 @@ public class BetaBotTele extends CommandOpMode {
         rb = new Motor(hardwareMap, "rb", Motor.GoBILDA.RPM_435);
         rf = new Motor(hardwareMap, "rf", Motor.GoBILDA.RPM_435);
 
+        leftLift = new Motor(hardwareMap, "left");
+        rightLift = new Motor(hardwareMap, "right");
+
         //subsystem declarations
+        liftSubsystem = new LiftSubsystem(leftLift, rightLift);
         driveSubsystem = new DriveSubsystem(lf, rf, lb, rb, revIMU);
 
         // drive command doo doo
@@ -45,6 +53,12 @@ public class BetaBotTele extends CommandOpMode {
 
         RevIMU imu = new RevIMU(hardwareMap);
         imu.init();
+
+        //slides
+        Scott.getGamepadButton(GamepadKeys.Button.A)
+                .whenHeld(new LiftCommand(liftSubsystem, 1));
+        Scott.getGamepadButton(GamepadKeys.Button.B)
+                .whenHeld(new LiftCommand(liftSubsystem, 2));
 
         register(driveSubsystem);
         driveSubsystem.setDefaultCommand(driveCommand);

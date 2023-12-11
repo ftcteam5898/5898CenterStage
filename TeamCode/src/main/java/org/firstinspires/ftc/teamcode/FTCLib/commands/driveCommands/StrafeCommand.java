@@ -12,18 +12,23 @@ public class StrafeCommand extends CommandBase {
     private double speed;
     private ElapsedTime time;
     private double stop;
+    private boolean hell; // true for right false for left
 
-    public StrafeCommand(int inches, double speed, DriveSubsystem drive, ElapsedTime time, double stop) {
+    public StrafeCommand(int inches, double speed, DriveSubsystem drive, ElapsedTime time, double stop, boolean hell) {
         distance = inches;
         this.speed = speed;
         this.drive = drive;
         this.time = time;
         this.stop = stop;
+        this.hell = hell;
     }
     @Override
     public void initialize() {
         time.reset();
         drive.resetEncoders();
+        if (!hell) {
+            drive.lStrafe(distance, speed);
+        }
         drive.strafe(distance, speed);
     }
     @Override

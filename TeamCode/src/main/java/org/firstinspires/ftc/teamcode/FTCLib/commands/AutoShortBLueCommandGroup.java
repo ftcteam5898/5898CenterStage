@@ -27,7 +27,7 @@ public class AutoShortBLueCommandGroup extends SequentialCommandGroup {
         this.time = time;
 
         Trajectory traj1 = mecanumDriveSubsystem.trajectoryBuilder(startPos)
-                .strafeLeft(30)
+                .strafeLeft(80)
                 .build();
 
         addCommands(

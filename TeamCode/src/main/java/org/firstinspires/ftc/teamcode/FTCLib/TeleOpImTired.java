@@ -14,13 +14,13 @@ import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.BumpCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.DroneCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.IntakeCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.ClawCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.LiftCommand;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.LiftCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff.RotateIntakeCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands.DriveCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.ClawSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.ClawSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DroneSubsystem;
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.IntakeSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.DroneSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.LiftSubsystem;
 
 @TeleOp(name = "SleepyTime", group = "tele")

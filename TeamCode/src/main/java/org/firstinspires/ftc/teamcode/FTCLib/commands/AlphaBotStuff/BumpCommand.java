@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode.FTCLib.commands.AlphaBotStuff;
 
 import com.arcrobotics.ftclib.command.CommandBase;
-import com.arcrobotics.ftclib.command.InstantCommand;
 
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.ClawSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.ClawSubsystem;
 
 public class BumpCommand extends CommandBase {
 

@@ -10,9 +10,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands.DriveCommand;
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.ClawSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.ClawSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
-import org.firstinspires.ftc.teamcode.FTCLib.subsystems.IntakeSubsystem;
+import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.IntakeSubsystem;
 
 import java.util.function.DoubleSupplier;
 

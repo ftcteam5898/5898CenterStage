@@ -58,6 +58,17 @@ public class DriveSubsystem extends SubsystemBase {
         lb.setTargetPosition(lb.getCurrentPosition() - amt);
         allPower(power);
     }
+    public void lStrafe(int amt, double power) {
+        rf.setTargetPosition(rf.getCurrentPosition() - amt);
+        rb.setTargetPosition(rb.getCurrentPosition() + amt);
+        lf.setTargetPosition(lf.getCurrentPosition() + amt);
+        lb.setTargetPosition(lb.getCurrentPosition() - amt);
+        allPower(power);
+        rf.setInverted(true);
+        rb.setInverted(true);
+        lf.setInverted(true);
+        lb.setInverted(true);
+    }
     public void leftAmt(int amt, double power) {
         rf.setTargetPosition(rf.getCurrentPosition() + amt);
         rb.setTargetPosition(rb.getCurrentPosition() + amt);
