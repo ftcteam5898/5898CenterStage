@@ -34,16 +34,16 @@ public class LiftSubsystem extends SubsystemBase {
     }
 
     public void motorsUp() {
-        leftLift.set(-0.7);
+        leftLift.set(-0.6);
         leftLift.setTargetPosition(leftLift.getCurrentPosition() + 10);
-        rightLift.set(-0.7);
-        rightLift.setTargetPosition(rightLift.getCurrentPosition() + 10);
+        rightLift.set(0.6);
+        rightLift.setTargetPosition(rightLift.getCurrentPosition() - 10);
     }
     public void motorsDown() {
-        leftLift.set(0.7);
+        leftLift.set(0.6);
         leftLift.setTargetPosition(leftLift.getCurrentPosition() - 10);
-        rightLift.set(0.7);
-        rightLift.setTargetPosition(rightLift.getCurrentPosition() - 10);
+        rightLift.set(-0.6);
+        rightLift.setTargetPosition(rightLift.getCurrentPosition() + 10);
     }
     public void motorsStop() {
         leftLift.stopMotor();
