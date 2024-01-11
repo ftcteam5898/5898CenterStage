@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.FTCLib.subsystems.MecanumDriveSubsystem;
 
 import java.util.function.IntSupplier;
 
-public class AutoLongCommandGroup extends SequentialCommandGroup {
+public class FirstAutoCommandGroup extends SequentialCommandGroup {
 
     private ElapsedTime time = new ElapsedTime();
     private MecanumDriveSubsystem mecanumDriveSubsystem;
@@ -26,8 +26,8 @@ public class AutoLongCommandGroup extends SequentialCommandGroup {
     private final Pose2d startPos = new Pose2d(58.44, -35.83, 180.0);
 
 
-public AutoLongCommandGroup(MecanumDriveSubsystem mecanumDriveSubsystem, LiftSubsystem liftSubsystem,
-                            ScoreSubsystem scoreSubsystem, ElapsedTime time, IntSupplier sugma) {
+public FirstAutoCommandGroup(MecanumDriveSubsystem mecanumDriveSubsystem, LiftSubsystem liftSubsystem,
+                             ScoreSubsystem scoreSubsystem, ElapsedTime time, IntSupplier sugma) {
     mecanumDriveSubsystem.setPoseEstimate(startPos);
 
     Trajectory traj1 = mecanumDriveSubsystem.trajectoryBuilder(startPos)

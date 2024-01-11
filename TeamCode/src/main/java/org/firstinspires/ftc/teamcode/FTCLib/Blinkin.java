@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 import java.util.concurrent.TimeUnit;
 
 @TeleOp(name = "Blinkin")
-public class Blinkin extends CommandOpMode {
+public class Blinkin extends OpMode {
 
     /*
      * Change the pattern every 10 seconds in AUTO mode.
@@ -38,7 +38,7 @@ public class Blinkin extends CommandOpMode {
     }
 
     @Override
-    public void initialize()
+    public void init()
     {
         displayKind = DisplayKind.AUTO;
 
@@ -53,19 +53,19 @@ public class Blinkin extends CommandOpMode {
         gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
     }
 
-    //@Override
-    //public void loop()
-    //{
-        //handleGamepad();
+    @Override
+    public void loop()
+    {
+        handleGamepad();
 
-        //if (displayKind == DisplayKind.AUTO) {
-        //    doAutoDisplay();
-        //} else {
+        if (displayKind == DisplayKind.AUTO) {
+            doAutoDisplay();
+        } else {
             /*
              * MANUAL mode: Nothing to do, setting the pattern as a result of a gamepad event.
              */
-        //}
-    //}
+        }
+    }
 
     /*
      * handleGamepad
@@ -93,11 +93,11 @@ public class Blinkin extends CommandOpMode {
             gamepadRateLimit.reset();
         } else if ((displayKind == DisplayKind.MANUAL) && (gamepad1.left_bumper)) {
             pattern = pattern.previous();
-            displayPattern();
+            displayPattern(pattern);
             gamepadRateLimit.reset();
         } else if ((displayKind == DisplayKind.MANUAL) && (gamepad1.right_bumper)) {
             pattern = pattern.next();
-            displayPattern();
+            displayPattern(pattern);
             gamepadRateLimit.reset();
         }
     }
@@ -112,12 +112,12 @@ public class Blinkin extends CommandOpMode {
     {
         if (ledCycleDeadline.hasExpired()) {
             pattern = pattern.next();
-            displayPattern();
+            displayPattern(pattern);
             ledCycleDeadline.reset();
         }
     }
 
-    protected void displayPattern()
+    protected void displayPattern(RevBlinkinLedDriver.BlinkinPattern pat)
     {
         blinkinLedDriver.setPattern(pattern);
         patternName.setValue(pattern.toString());

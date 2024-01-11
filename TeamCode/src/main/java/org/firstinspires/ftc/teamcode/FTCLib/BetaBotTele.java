@@ -8,7 +8,9 @@ import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.CRIntakeCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.ClimbCommand;
@@ -39,6 +41,8 @@ public class BetaBotTele extends CommandOpMode {
     private CRIntakeSubsystem intakeSubsystem;
     private ScoreSubsystem scoreSubsystem;
     private DriveCommand driveCommand;
+    private ElapsedTime time;
+    private Blinkin blinkin;
 
     @Override
     public void initialize() {
@@ -50,6 +54,11 @@ public class BetaBotTele extends CommandOpMode {
         // hardware declarations
         revIMU = new RevIMU(hardwareMap);
         revIMU.init();
+
+        RevBlinkinLedDriver blinkinLedDriver;
+        RevBlinkinLedDriver.BlinkinPattern pattern;
+
+        time = new ElapsedTime();
 
         lb = new Motor(hardwareMap, "lb", Motor.GoBILDA.RPM_435);
         lf = new Motor(hardwareMap, "lf", Motor.GoBILDA.RPM_435);
@@ -74,6 +83,9 @@ public class BetaBotTele extends CommandOpMode {
         climbSubsystem = new ClimbSubsystem(climbLeft, climbRight);
         intakeSubsystem = new CRIntakeSubsystem(intake);
         scoreSubsystem = new ScoreSubsystem(arm, joint, grabber);
+
+        //led
+        blinkin = new Blinkin();
 
         // drive command doo doo
         driveCommand = new DriveCommand(driveSubsystem, Adam::getLeftX, Adam::getLeftY,
@@ -106,6 +118,10 @@ public class BetaBotTele extends CommandOpMode {
                         .whenHeld(new GrabberCommand(scoreSubsystem, 1));
         Scott.getGamepadButton(GamepadKeys.Button.X)
                 .whenHeld(new GrabberCommand(scoreSubsystem, 2));
+        // leds
+        Adam.getGamepadButton(GamepadKeys.Button.Y)
+                        .whenPressed(new InstantCommand(()->
+                                blinkin.displayPattern(RevBlinkinLedDriver.BlinkinPattern.STROBE_RED)));
 
         register(driveSubsystem);
         driveSubsystem.setDefaultCommand(driveCommand);
