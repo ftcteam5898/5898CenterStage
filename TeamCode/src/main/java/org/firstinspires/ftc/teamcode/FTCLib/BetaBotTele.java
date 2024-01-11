@@ -12,6 +12,8 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.CRIntakeCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.ClimbCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.GrabberCommand;
@@ -23,6 +25,8 @@ import org.firstinspires.ftc.teamcode.FTCLib.subsystems.BetaBotSubsystems.ClimbS
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.BetaBotSubsystems.ScoreSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.LiftSubsystem;
+
+import java.util.concurrent.TimeUnit;
 
 @TeleOp(name = "MikhailLovell", group = "tele")
 public class BetaBotTele extends CommandOpMode {
@@ -44,8 +48,42 @@ public class BetaBotTele extends CommandOpMode {
     private ElapsedTime time;
     private Blinkin blinkin;
 
+    private final static int LED_PERIOD = 10;
+
+    /*
+     * Rate limit gamepad button presses to every 500ms.
+     */
+    private final static int GAMEPAD_LOCKOUT = 500;
+
+    RevBlinkinLedDriver blinkinLedDriver;
+    RevBlinkinLedDriver.BlinkinPattern pattern;
+
+    Telemetry.Item patternName;
+    Telemetry.Item display;
+    Blinkin.DisplayKind displayKind;
+    Deadline ledCycleDeadline;
+    Deadline gamepadRateLimit;
+
+    protected enum DisplayKind {
+        MANUAL,
+        AUTO
+    }
+
     @Override
     public void initialize() {
+
+        displayKind = Blinkin.DisplayKind.AUTO;
+
+        blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
+        pattern = RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_LAVA_PALETTE;
+        blinkinLedDriver.setPattern(pattern);
+
+        display = telemetry.addData("Display Kind: ", displayKind.toString());
+        patternName = telemetry.addData("Pattern: ", pattern.toString());
+
+        ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
+        gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
+
 
         // naming gamepads after drivers to make things simpler
         Adam = new GamepadEx(gamepad1);

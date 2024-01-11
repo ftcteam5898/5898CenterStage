@@ -43,7 +43,7 @@ public class Blinkin extends OpMode {
         displayKind = DisplayKind.AUTO;
 
         blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
-        pattern = RevBlinkinLedDriver.BlinkinPattern.STROBE_RED;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.TWINKLES_RAINBOW_PALETTE;
         blinkinLedDriver.setPattern(pattern);
 
         display = telemetry.addData("Display Kind: ", displayKind.toString());
