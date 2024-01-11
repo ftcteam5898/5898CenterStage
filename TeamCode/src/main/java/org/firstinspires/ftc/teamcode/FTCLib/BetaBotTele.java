@@ -98,8 +98,6 @@ public class BetaBotTele extends CommandOpMode {
         Scott.getGamepadButton(GamepadKeys.Button.DPAD_LEFT)
                 .whenHeld(new CRIntakeCommand(intakeSubsystem, 1));
         //swing
-        Scott.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
-                .whenPressed(new SwingCommand(scoreSubsystem, 1));
         Scott.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER)
                 .toggleWhenPressed(new SwingCommand(scoreSubsystem, 1), new SwingCommand(
                         scoreSubsystem, 2));
@@ -108,7 +106,6 @@ public class BetaBotTele extends CommandOpMode {
                         .whenHeld(new GrabberCommand(scoreSubsystem, 1));
         Scott.getGamepadButton(GamepadKeys.Button.X)
                 .whenHeld(new GrabberCommand(scoreSubsystem, 2));
-
 
         register(driveSubsystem);
         driveSubsystem.setDefaultCommand(driveCommand);
