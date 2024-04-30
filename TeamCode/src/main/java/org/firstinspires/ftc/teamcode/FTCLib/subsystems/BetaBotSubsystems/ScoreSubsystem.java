@@ -16,16 +16,22 @@ public class ScoreSubsystem extends SubsystemBase {
     }
 
     public void scoreJoint() {
-        joint.rotateByAngle(-1.5);
+        joint.turnToAngle(-360.0);
     }
     public void resetJoint() {
-        joint.rotateBy(1.0);
+        joint.turnToAngle(-35.0);
     }
     public void scoreArm() {
-        arm.turnToAngle(-24.0);
+        arm.turnToAngle(-43.0);
+    }
+    public void pickUpArm() {
+        arm.turnToAngle(5.0);
+    }
+    public void pickUpJoint() {
+        joint.turnToAngle(5.0);
     }
     public void resetArm() {
-        arm.turnToAngle(0.0);
+        arm.turnToAngle(-8.0);
     }
     public void scoreGrabber() {
         grabber.set(0.2);
@@ -38,6 +44,9 @@ public class ScoreSubsystem extends SubsystemBase {
     }
     public void stopArm() {
         arm.disable();
+    }
+    public void stopJoint() {
+        joint.disable();
     }
 
 }

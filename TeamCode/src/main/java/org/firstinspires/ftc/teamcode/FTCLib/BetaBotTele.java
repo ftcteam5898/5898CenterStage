@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.FTCLib;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.WaitCommand;
+import com.arcrobotics.ftclib.command.WaitUntilCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.RevIMU;
@@ -9,7 +11,9 @@ import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -17,6 +21,7 @@ import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.CRIntakeCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.ClimbCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.GrabberCommand;
+import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.PickupCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.BetaBotStuff.SwingCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.LiftCommand;
 import org.firstinspires.ftc.teamcode.FTCLib.commands.driveCommands.DriveCommand;
@@ -72,10 +77,11 @@ public class BetaBotTele extends CommandOpMode {
     @Override
     public void initialize() {
 
+        // led stuff
         displayKind = Blinkin.DisplayKind.AUTO;
 
         blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
-        pattern = RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_LAVA_PALETTE;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_LAVA_PALETTE; // color pattern
         blinkinLedDriver.setPattern(pattern);
 
         display = telemetry.addData("Display Kind: ", displayKind.toString());
@@ -83,6 +89,10 @@ public class BetaBotTele extends CommandOpMode {
 
         ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
         gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
+        ledCycleDeadline.startTime();
+
+        time = new ElapsedTime();
+        time.reset();
 
 
         // naming gamepads after drivers to make things simpler
@@ -96,13 +106,14 @@ public class BetaBotTele extends CommandOpMode {
         RevBlinkinLedDriver blinkinLedDriver;
         RevBlinkinLedDriver.BlinkinPattern pattern;
 
+
         time = new ElapsedTime();
 
         lb = new Motor(hardwareMap, "lb", Motor.GoBILDA.RPM_435);
         lf = new Motor(hardwareMap, "lf", Motor.GoBILDA.RPM_435);
         rb = new Motor(hardwareMap, "rb", Motor.GoBILDA.RPM_435);
         rf = new Motor(hardwareMap, "rf", Motor.GoBILDA.RPM_435);
-        rf.setInverted(true);
+        lf.setInverted(false);
 
         leftLift = new Motor(hardwareMap, "left");
         rightLift = new Motor(hardwareMap, "right");
@@ -112,12 +123,12 @@ public class BetaBotTele extends CommandOpMode {
 
         intake = new CRServo(hardwareMap, "intake");
         arm = new SimpleServo(hardwareMap, "arm", -90.0,90.0);
-        joint = new SimpleServo(hardwareMap, "joint", -90.0, 90.0);
+        joint = new SimpleServo(hardwareMap, "joint", -360.0, 90.0);
         grabber = new CRServo(hardwareMap, "grabber");
 
         //subsystem declarations
         liftSubsystem = new LiftSubsystem(leftLift, rightLift);
-        driveSubsystem = new DriveSubsystem(lf, rf, lb, rb, revIMU);
+        driveSubsystem = new DriveSubsystem(lf, rf, lb, rb);
         climbSubsystem = new ClimbSubsystem(climbLeft, climbRight);
         intakeSubsystem = new CRIntakeSubsystem(intake);
         scoreSubsystem = new ScoreSubsystem(arm, joint, grabber);
@@ -131,6 +142,10 @@ public class BetaBotTele extends CommandOpMode {
 
         RevIMU imu = new RevIMU(hardwareMap);
         imu.init();
+                new RevHubOrientationOnRobot(
+                        RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                        RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
+                );
 
         //slides
         Scott.getGamepadButton(GamepadKeys.Button.A)
@@ -138,9 +153,9 @@ public class BetaBotTele extends CommandOpMode {
         Scott.getGamepadButton(GamepadKeys.Button.B)
                 .whenHeld(new LiftCommand(liftSubsystem, 2));
         //upya
-        Scott.getGamepadButton(GamepadKeys.Button.DPAD_UP)
+        Adam.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER)
                         .whenHeld(new ClimbCommand(climbSubsystem, 2));
-        Scott.getGamepadButton(GamepadKeys.Button.DPAD_DOWN)
+        Adam.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
                         .whenHeld(new ClimbCommand(climbSubsystem, 1));
         //intake
         Scott.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT)
@@ -151,17 +166,23 @@ public class BetaBotTele extends CommandOpMode {
         Scott.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER)
                 .toggleWhenPressed(new SwingCommand(scoreSubsystem, 1), new SwingCommand(
                         scoreSubsystem, 2));
-        //testing
-        Scott.getGamepadButton(GamepadKeys.Button.Y)
+        //grabber
+        Scott.getGamepadButton(GamepadKeys.Button.DPAD_UP)
                         .whenHeld(new GrabberCommand(scoreSubsystem, 1));
-        Scott.getGamepadButton(GamepadKeys.Button.X)
+        Scott.getGamepadButton(GamepadKeys.Button.DPAD_DOWN)
                 .whenHeld(new GrabberCommand(scoreSubsystem, 2));
-        // leds
-        Adam.getGamepadButton(GamepadKeys.Button.Y)
-                        .whenPressed(new InstantCommand(()->
-                                blinkin.displayPattern(RevBlinkinLedDriver.BlinkinPattern.STROBE_RED)));
+        Scott.getGamepadButton(GamepadKeys.Button.Y)
+                        .whenPressed(new InstantCommand(() -> scoreSubsystem.scoreJoint()));
+        Scott.getGamepadButton(GamepadKeys.Button.X)
+                .whenPressed(new InstantCommand(() -> scoreSubsystem.resetJoint()));
+        Scott.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
+                        .toggleWhenPressed(new PickupCommand(scoreSubsystem),
+                                new SwingCommand(scoreSubsystem, 1));
+
 
         register(driveSubsystem);
         driveSubsystem.setDefaultCommand(driveCommand);
+
+
     }
 }

@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -15,7 +16,7 @@ import org.firstinspires.ftc.teamcode.FTCLib.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.FTCLib.subsystems.AlphaBotSubsystems.IntakeSubsystem;
 
 import java.util.function.DoubleSupplier;
-
+@Disabled
 @TeleOp (name = "Meet1TeleNONO", group = "tele")
 public class Meet1Tele extends CommandOpMode {
 

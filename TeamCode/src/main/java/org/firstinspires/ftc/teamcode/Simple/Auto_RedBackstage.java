@@ -315,7 +315,7 @@ public class Auto_RedBackstage extends LinearOpMode{
         IMU.Parameters parameters = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
                         RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                        RevHubOrientationOnRobot.UsbFacingDirection.LEFT
+                        RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
                 )
         );
 

@@ -49,4 +49,14 @@ public class LiftSubsystem extends SubsystemBase {
         leftLift.stopMotor();
         rightLift.stopMotor();
     }
+    public void motorHold() {
+        if (leftLift.getCurrentPosition() <= -1000) {
+            leftLift.set(-0.009);
+            rightLift.set(0.009);
+        }
+        else if (leftLift.getCurrentPosition() <= -2000) {
+            leftLift.set(-0.009);
+            rightLift.set(0.009);
+        }
+    }
 }

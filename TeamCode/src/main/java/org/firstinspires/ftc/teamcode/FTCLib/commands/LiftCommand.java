@@ -28,7 +28,7 @@ public class LiftCommand extends CommandBase {
     }
     @Override
     public boolean isFinished() {
-        return leftLift.getCurrentPosition() <= -2000;
+        return leftLift.getCurrentPosition() <= -3000;
     }
     @Override
     public void end(boolean interupted) {

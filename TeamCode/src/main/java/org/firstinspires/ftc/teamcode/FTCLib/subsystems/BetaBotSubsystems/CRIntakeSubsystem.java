@@ -12,10 +12,10 @@ public class CRIntakeSubsystem extends SubsystemBase {
     }
 
     public void intakeIn() {
-        intake.set(0.2);
+        intake.set(0.8);
     }
     public void intakeOut() {
-        intake.set(-0.2);
+        intake.set(-0.8);
     }
     public void intakeStop() {
         intake.set(0.0);

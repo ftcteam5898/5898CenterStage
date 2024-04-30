@@ -62,6 +62,8 @@ public class Auto_RedFront extends LinearOpMode{
         // Call functions here
 
         // go forward and back up to drop off the purple pixel on the tape line
+        //strafeLeft(4, 0.5);
+        //strafeRight(4, 0.5);
         forward(28, 1);
         back(26, 0.5);
 
@@ -71,7 +73,7 @@ public class Auto_RedFront extends LinearOpMode{
         turnLeft(10, 0.5);
         forward(24, 0.1);
         turnRight(10, 0.5);
-        forward(48, 1);
+        forward(44, 1);
     }
 
 
@@ -317,7 +319,7 @@ public class Auto_RedFront extends LinearOpMode{
         IMU.Parameters parameters = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
                         RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                        RevHubOrientationOnRobot.UsbFacingDirection.LEFT
+                        RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
                 )
         );
 
